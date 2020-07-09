@@ -43,16 +43,16 @@ export class TasksService {
     return task;
   }
 
-  createTask(createTaskDto: CreateTaskDto): Task {
+  async createTask(createTaskDto: CreateTaskDto): Promise<Task> {
     const { title, description } = createTaskDto;
-    const task: Task = {
-      id: uuidv1(),
+    const task: Task = new Task(
       title,
       description,
-      status: TaskStatus.OPEN
-    };
+      TaskStatus.OPEN
+    );
 
-    this.tasks.push(task);
+    await task.save()
+
     return task;
   }
 

@@ -14,4 +14,11 @@ export class Task extends BaseEntity {
 
   @Column()
   status: TaskStatus;
+
+  constructor(title: string, description: string, status: TaskStatus) {
+    super();
+    this.title = title;
+    this.description = description;
+    this.status = status;
+  }
 }
