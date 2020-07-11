@@ -23,8 +23,11 @@ export class TasksController {
   }
 
   @Get('/:id')
-  getTask(@Param('id', ParseIntPipe) id: number): Promise<Task> {
-    return this.taskService.getTaskbyId(id);
+  getTask(
+    @Param('id', ParseIntPipe) id: number,
+    @GetUser() user: User
+  ): Promise<Task> {
+    return this.taskService.getTaskbyId(id, user);
   }
 
   @Post()
@@ -42,7 +45,11 @@ export class TasksController {
   }
 
   @Patch('/:id/status')
-  changeTaskstatus(@Param('id', ParseIntPipe) id: number, @Body('status', TaskStatusValidationPipe) status: TaskStatus): Promise<Task> {
-    return this.taskService.changeTaskStatus(id, status);
+  changeTaskstatus(
+    @Param('id', ParseIntPipe) id: number, 
+    @Body('status', TaskStatusValidationPipe) status: TaskStatus,
+    @GetUser() user: User
+  ): Promise<Task> {
+    return this.taskService.changeTaskStatus(id, status, user);
   }
 }
