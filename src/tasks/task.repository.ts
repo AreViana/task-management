@@ -4,9 +4,11 @@ import { CreateTaskDto } from "./dto/create-task.dto";
 import { TaskStatus } from "./task-status.enum";
 import { GetTaskFilterDto } from "./dto/get-task-filter.dto";
 import { User } from "src/user/user.entity";
+import { Logger } from "@nestjs/common";
 
 @EntityRepository(Task)
 export class TaskRepository extends Repository<Task> {
+  private logger = new Logger('TaskRepository');
 
   async getTasks(filter: GetTaskFilterDto, user: User): Promise<Task[]>  {
     const { status, search } = filter;
@@ -32,7 +34,11 @@ export class TaskRepository extends Repository<Task> {
       user
     });
 
-    await task.save()
+    try {
+      await task.save()
+    } catch (error) {
+      this.logger.error(`Failed to create a task for user ${user.username}`, error.stack);
+    }
 
     delete task.user; // To not display the user node in the response
     return task;
