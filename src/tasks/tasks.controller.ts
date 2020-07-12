@@ -6,8 +6,8 @@ import { GetTaskFilterDto } from './dto/get-task-filter.dto';
 import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
 import { TaskStatus } from './task-status.enum';
 import { Task } from './task.entity';
-import { GetUser } from 'src/auth/auth.decorator';
-import { User } from 'src/user/user.entity';
+import { GetUser } from '../auth/auth.decorator';
+import { User } from '../user/user.entity';
 
 @Controller('tasks')
 @UseGuards(AuthGuard('jwt'))

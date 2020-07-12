@@ -1,10 +1,10 @@
-import { Repository, EntityRepository } from "typeorm";
-import { Task } from "./task.entity";
-import { CreateTaskDto } from "./dto/create-task.dto";
-import { TaskStatus } from "./task-status.enum";
-import { GetTaskFilterDto } from "./dto/get-task-filter.dto";
-import { User } from "src/user/user.entity";
-import { Logger } from "@nestjs/common";
+import { Repository, EntityRepository } from 'typeorm';
+import { Task } from './task.entity';
+import { CreateTaskDto } from './dto/create-task.dto';
+import { TaskStatus } from './task-status.enum';
+import { GetTaskFilterDto } from './dto/get-task-filter.dto';
+import { User } from '../user/user.entity';
+import { Logger } from '@nestjs/common';
 
 @EntityRepository(Task)
 export class TaskRepository extends Repository<Task> {
